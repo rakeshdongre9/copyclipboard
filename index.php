@@ -1,3 +1,50 @@
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+
+  <div class="copy-content">This is the first text you can copy. 1</div>
+  <button class="copy-button">Copy Text 1</button>
+
+  <div class="copy-content">This is the second text you can copy . 2</div>
+  <button class="copy-button">Copy Text 2</button>
+
+  <div class="copy-content">This is the third text you can copy. 3</div>
+  <button class="copy-button">Copy Text 3</button>
+
+<script>
+  const copyButtons = document.querySelectorAll('.copy-button');
+
+  copyButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const textToCopy = button.previousElementSibling.textContent; // Get text from previous div
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('Copied "' + textToCopy + '" to clipboard!');
+        })
+        .catch(err => {
+          console.error('Failed to copy:', err);
+        });
+    });
+  });
+</script>
+   
+
+
+
+
+
+
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
