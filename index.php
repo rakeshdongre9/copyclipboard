@@ -1,31 +1,41 @@
-             <div class="col-12 grid-margin">
-                <div class="card">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h4 class="card-title">clipboard on text input</h4>
-                        <p class="card-description">Cut/copy from text input</p>
-                        <input type="text" id="clipboardExample1" class="form-control" value="hello">
-                        <div class="mt-3">
-                          <button type="button" class="btn btn-info btn-clipboard" data-clipboard-action="copy" data-clipboard-target="#clipboardExample1">Copy</button>
-                          <button type="button" class="btn btn-success btn-clipboard" data-clipboard-action="cut" data-clipboard-target="#clipboardExample1">Cut</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="card-body">
-                        <h4 class="card-title">Clipboard on textarea</h4>
-                        <p class="card-description">Cut/copy from textarea</p>
-                        <textarea id="clipboardExample2" class="form-control" rows="3">Hello</textarea>
-                        <div class="mt-3">
-                          <button type="button" class="btn btn-info btn-clipboard" data-clipboard-action="copy" data-clipboard-target="#clipboardExample2">Copy</button>
-                          <button type="button" class="btn btn-success btn-clipboard" data-clipboard-action="cut" data-clipboard-target="#clipboardExample2">Cut</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                                 
-                                 
-                           
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy to Clipboard Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+</head>
+<body>
+    <div class="copy-content">This is the first text you can copy.</div>
+    <button class="copy-button" data-target=".copy-content:nth-of-type(1)">Copy Text 1</button>
+
+    <div class="copy-content">This is the second text you can copy.</div>
+    <button class="copy-button" data-target=".copy-content:nth-of-type(2)">Copy Text 2</button>
+
+    <div class="copy-content">This is the third text you can copy.</div>
+    <button class="copy-button" data-target=".copy-content:nth-of-type(3)">Copy Text 3</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const clipboard = new ClipboardJS('.copy-button', {
+                target: function(trigger) {
+                    // Get the selector from the data-target attribute
+                    const targetSelector = trigger.getAttribute('data-target');
+                    return document.querySelector(targetSelector);
+                }
+            });
+
+            clipboard.on('success', function(e) {
+                alert('Copied "' + e.text + '" to clipboard!');
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
+        });
+    </script>
+</body>
+</html>
